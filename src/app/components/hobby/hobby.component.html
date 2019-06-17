@@ -1,0 +1,120 @@
+<div class="card text-center">
+    <h3>Formulario<small>Repaso De Formulario Reactivo</small> </h3>
+</div>
+
+<hr>
+
+<div class="card">
+    <div>
+        <form [formGroup]="form">
+            <div class="row text-center">
+
+                <div class="col-md-6">
+                    <mat-form-field class="full text-center">
+                        <input matInput placeholder="Nombre" formControlName="nombre">
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                    <mat-form-field class="full text-center">
+                        <input matInput placeholder="Apellido" formControlName="apellido">
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                    <mat-form-field class="full text-center">
+                        <input matInput placeholder="Edad" type="number" formControlName="edad">
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                    <mat-form-field class="full text-center">
+                        <input matInput placeholder="Fecha De Nacimiento" type="date" formControlName="fecha">
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                    <mat-form-field class="full text-center">
+                        <mat-select placeholder="telefono" formControlName="telefono" type="number">
+                            <mat-option></mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-6" *ngIf="form.controls['telefono'].value === 'cel' ">
+                    <mat-form-field class="full text-center">
+                        <input matInput placeholder="Numero De Celular" type="number" formControlName="numTelefono">
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-6" *ngIf="form.controls['telefono'].value === 'tel'">
+                    <mat-form-field class="full text-center">
+                        <input matInput placeholder="Numero Fijo" type="number" formControlName="numFijo">
+                    </mat-form-field>
+                </div>
+
+                <!--bloque para los dos numeros numeros----------------------------------->
+                <div class="col-md-6" *ngIf="form.controls['telefono'].value === 'ambos'">
+                    <mat-form-field class="full text-center">
+                        <input matInput placeholder="Numero De Celular" type="number" formControlName="numTelefono">
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-6" *ngIf="form.controls['telefono'].value === 'ambos'">
+                    <mat-form-field class="full text-center">
+                        <input matInput placeholder="Numero Fijo" type="number" formControlName="numFijo">
+                    </mat-form-field>
+                </div>
+                <!----------------------------------------------------------------------->
+
+                <div class="col-md-6">
+                    <mat-form-field class="full text-center">
+                        <mat-select placeholder="Nacionalidad" formControlName="pais">
+                            <mat-option></mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                    <mat-form-field class="full text-center" *ngIf="form.controls['pais'].value !== 'otr'">
+                        <mat-select placeholder="Ciudad De Nacimiento" formControlName="ciudad">
+                            <mat-option></mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <!---bloque para la ciudad diferente------------------------>
+                <div class="col-md-6" *ngIf="form.controls['ciudad'].value === 'otr' ">
+                    <mat-form-field class="full text-center">
+                        <input matInput placeholder="Ingrese La Ciudad" formControlName="otraCiudad">
+                    </mat-form-field>
+                </div>
+                <!------------------------------------------------------------->
+
+                <!--bloque para el pais diferente------------------------------->
+                <div class="col-md-6" *ngIf="form.controls['pais'].value === 'otr' ">
+                    <mat-form-field class="full text-center">
+                        <input matInput placeholder="Ingrese El Pais" formControlName="otoPais">
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-6" *ngIf="form.controls['pais'].value === 'otr' ">
+                    <mat-form-field class="full text-center">
+                        <input matInput placeholder="Ingrese La Ciudad" formControlName="otraCiudad">
+                    </mat-form-field>
+                </div>
+                <!-------------------------------------------------------------->
+
+                <div class="col-md-6">
+                    <mat-form-field class="full text-center">
+                        <mat-select placeholder="Hobby" formControlName="hobby">
+                            <mat-option></mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+
+            </div>
+        </form>
+    </div>
+</div>
