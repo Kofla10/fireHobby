@@ -1,3 +1,30 @@
-<p>
-  view-form works!
-</p>
+<div class="card">
+    <div class="text-center">
+
+        <table class="table">
+            <thead class="thead-dark animated jackInTheBox">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre Completo </th>
+                    <th scope="col">Edad</th>
+                    <th scope="col">Numeros Tel</th>
+                    <th scope="col">Pais</th>
+                    <th scope="col">Ciudad</th>
+                    <th scope="col">Hobby</th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let hob of hobby; let i = index" class="animated zoomIn">
+                <tr>
+                    <th scope="row">{{i + 1}} </th>
+                    <td> {{hob.nombre}} {{hob.apellido}}</td>
+                    <td> {{hob.edad}} </td>
+                    <td>{{hob.numFijo}} <br> {{hob.numTelefono}} </td>
+                    <td> {{hob.pais}} <br> {{hob.otroPais}} </td>
+                    <td> {{hob.ciudad}} <br> {{hob.otraCiudad}} </td>
+                    <td>{{hob.hobby}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>

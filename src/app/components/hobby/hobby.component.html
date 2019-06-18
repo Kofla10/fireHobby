@@ -1,4 +1,4 @@
-<div class="card text-center">
+<div class="card text-center animated lightSpeedIn">
     <h3>Formulario<small>Repaso De Formulario Reactivo</small> </h3>
 </div>
 
@@ -6,101 +6,119 @@
 
 <div class="card">
     <div>
-        <form [formGroup]="form">
-            <div class="row text-center">
+        <form [formGroup]="form" (ngSutmit)="guardar()">
+            <div class="row text-center animated flip">
 
                 <div class="col-md-6">
                     <mat-form-field class="full text-center">
                         <input matInput placeholder="Nombre" formControlName="nombre">
+                        <mat-error *ngIf="!form.controls['nombre'].valid">
+                            {{ getErrorField('nombre') }}</mat-error>
                     </mat-form-field>
+
                 </div>
 
                 <div class="col-md-6">
                     <mat-form-field class="full text-center">
                         <input matInput placeholder="Apellido" formControlName="apellido">
+                        <mat-error *ngIf="!form.controls['apellido'].valid"> {{getErrorField('apellido')}} </mat-error>
                     </mat-form-field>
                 </div>
 
                 <div class="col-md-6">
                     <mat-form-field class="full text-center">
                         <input matInput placeholder="Edad" type="number" formControlName="edad">
+                        <mat-error *ngIf="!form.controls['edad'].valid"> {{getErrorField('edad')}} </mat-error>
                     </mat-form-field>
                 </div>
 
                 <div class="col-md-6">
                     <mat-form-field class="full text-center">
                         <input matInput placeholder="Fecha De Nacimiento" type="date" formControlName="fecha">
+                        <mat-error *ngIf="!form.controls['fecha'].valid"> {{getErrorField('fecha')}} </mat-error>
                     </mat-form-field>
                 </div>
 
                 <div class="col-md-6">
                     <mat-form-field class="full text-center">
                         <mat-select placeholder="telefono" formControlName="telefono" type="number">
-                            <mat-option></mat-option>
+                            <mat-option *ngFor="let telefono of numTelefono" [value]="telefono.id">{{telefono.name}}
+                            </mat-option>
                         </mat-select>
+                        <mat-error *ngIf="!form.controls['telefono'].valid"> {{getErrorField('telefono')}} </mat-error>
                     </mat-form-field>
                 </div>
 
-                <div class="col-md-6" *ngIf="form.controls['telefono'].value === 'cel' ">
+                <div class="col-md-6 animated bounce" *ngIf="form.controls['telefono'].value === 'celular' ">
                     <mat-form-field class="full text-center">
                         <input matInput placeholder="Numero De Celular" type="number" formControlName="numTelefono">
+                        <mat-error *ngIf="!form.controls['numTelefono'].valid"> {{numTel('numTelefono')}} </mat-error>
                     </mat-form-field>
                 </div>
 
-                <div class="col-md-6" *ngIf="form.controls['telefono'].value === 'tel'">
+                <div class="col-md-6 animated bounce" *ngIf="form.controls['telefono'].value === 'fijo'">
                     <mat-form-field class="full text-center">
                         <input matInput placeholder="Numero Fijo" type="number" formControlName="numFijo">
+                        <mat-error *ngIf="!form.controls['numFijo'].valid"> {{numFij('numFijo')}} </mat-error>
                     </mat-form-field>
                 </div>
 
                 <!--bloque para los dos numeros numeros----------------------------------->
-                <div class="col-md-6" *ngIf="form.controls['telefono'].value === 'ambos'">
+                <div class="col-md-6 animated bounce" *ngIf="form.controls['telefono'].value === 'ambos'">
                     <mat-form-field class="full text-center">
                         <input matInput placeholder="Numero De Celular" type="number" formControlName="numTelefono">
+                        <mat-error *ngIf="!form.controls['numTelefono'].valid"> {{numTel('numTelefono')}} </mat-error>
                     </mat-form-field>
                 </div>
 
-                <div class="col-md-6" *ngIf="form.controls['telefono'].value === 'ambos'">
+                <div class="col-md-6 animated bounce" *ngIf="form.controls['telefono'].value === 'ambos'">
                     <mat-form-field class="full text-center">
                         <input matInput placeholder="Numero Fijo" type="number" formControlName="numFijo">
+                        <mat-error *ngIf="!form.controls['numFijo'].valid"> {{numFij('numFijo')}} </mat-error>
                     </mat-form-field>
                 </div>
                 <!----------------------------------------------------------------------->
 
                 <div class="col-md-6">
                     <mat-form-field class="full text-center">
-                        <mat-select placeholder="Nacionalidad" formControlName="pais">
-                            <mat-option></mat-option>
+                        <mat-select placeholder="Nacionalidad" formControlName="pais" (selectionChange)="selectCiudad($event.value)">
+                            <mat-option *ngFor="let pais of paises" [value]="pais.id"> {{pais.name}} </mat-option>
                         </mat-select>
+                        <mat-error *ngIf="!form.controls['pais'].valid"> {{getErrorField('pais')}} </mat-error>
                     </mat-form-field>
                 </div>
 
                 <div class="col-md-6">
                     <mat-form-field class="full text-center" *ngIf="form.controls['pais'].value !== 'otr'">
                         <mat-select placeholder="Ciudad De Nacimiento" formControlName="ciudad">
-                            <mat-option></mat-option>
+                            <mat-option *ngFor="let ciudad of  ciudades" [value]="ciudad.id">{{ciudad.name}}
+                            </mat-option>
                         </mat-select>
+                        <mat-error *ngIf="!form.controls['ciudad'].valid"> {{getErrorField('ciudad')}} </mat-error>
                     </mat-form-field>
                 </div>
 
                 <!---bloque para la ciudad diferente------------------------>
-                <div class="col-md-6" *ngIf="form.controls['ciudad'].value === 'otr' ">
+                <div class="col-md-6 animated bounce" *ngIf="form.controls['ciudad'].value === 'otr' ">
                     <mat-form-field class="full text-center">
                         <input matInput placeholder="Ingrese La Ciudad" formControlName="otraCiudad">
+                        <mat-error *ngIf="!form.controls['otraCiudad'].valid"> {{getErrorField('otraCiudad')}} </mat-error>
                     </mat-form-field>
                 </div>
                 <!------------------------------------------------------------->
 
                 <!--bloque para el pais diferente------------------------------->
-                <div class="col-md-6" *ngIf="form.controls['pais'].value === 'otr' ">
+                <div class="col-md-6 animated bounce" *ngIf="form.controls['pais'].value === 'otr' ">
                     <mat-form-field class="full text-center">
                         <input matInput placeholder="Ingrese El Pais" formControlName="otoPais">
+                        <mat-error *ngIf="!form.controls['otoPais'].valid"> {{getErrorField('otoPais')}} </mat-error>
                     </mat-form-field>
                 </div>
 
-                <div class="col-md-6" *ngIf="form.controls['pais'].value === 'otr' ">
+                <div class="col-md-6 animated bounce" *ngIf="form.controls['pais'].value === 'otr' ">
                     <mat-form-field class="full text-center">
                         <input matInput placeholder="Ingrese La Ciudad" formControlName="otraCiudad">
+                        <mat-error *ngIf="!form.controls['otraCiudad'].valid"> {{getErrorField('otraCiudad')}} </mat-error>
                     </mat-form-field>
                 </div>
                 <!-------------------------------------------------------------->
@@ -108,13 +126,116 @@
                 <div class="col-md-6">
                     <mat-form-field class="full text-center">
                         <mat-select placeholder="Hobby" formControlName="hobby">
-                            <mat-option></mat-option>
+                            <mat-option *ngFor="let hobby of hobbs" [value]="hobby.id"> {{hobby.name}} </mat-option>
                         </mat-select>
+                        <mat-error *ngIf="!form.controls['hobby'].valid"> {{getErrorField('hobby')}} </mat-error>
                     </mat-form-field>
                 </div>
 
+                <!---bloque para hobbys futbol----------------------------------------------->
+                <div class="col-md-6 animated bounce" *ngIf="form.controls['hobby'].value === 'futbol'">
+                    <mat-form-field class="full text-center">
+                        <input matInput placeholder="Juegas Futbol" formControlName="pregunta1">
+                        <mat-error *ngIf="!form.controls['pregunta1'].valid"> {{getErrorField('pregunta1')}} </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-6 animated bounce" *ngIf="form.controls['hobby'].value === 'futbol'">
+                    <mat-form-field class="full text-center">
+                        <input matInput placeholder="Equipo Favorito" formControlName="pregunta2">
+                        <mat-error *ngIf="!form.controls['pregunta2'].valid"> {{getErrorField('pregunta2')}} </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-6 animated bounce" *ngIf="form.controls['hobby'].value === 'futbol'">
+                    <mat-form-field class="full text-center">
+                        <input matInput placeholder="Jugador Favorito" formControlName="pregunta3">
+                        <mat-error *ngIf="!form.controls['pregunta3'].valid"> {{getErrorField('pregunta3')}} </mat-error>
+                    </mat-form-field>
+                </div>
+                <!----------------------------------------------------->
+
+                <!---bloque para hobbys cine----------------------------------------------->
+                <div class="col-md-6 animated bounce" *ngIf="form.controls['hobby'].value === 'cine'">
+                    <mat-form-field class="full text-center">
+                        <input matInput placeholder="Pelicula Favorita" formControlName="pregunta1">
+                        <mat-error *ngIf="!form.controls['pregunta1'].valid"> {{getErrorField('pregunta1')}} </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-6 animated bounce" *ngIf="form.controls['hobby'].value === 'cine'">
+                    <mat-form-field class="full text-center">
+                        <input matInput placeholder="Mejor Actor o Actriz" formControlName="pregunta2">
+                        <mat-error *ngIf="!form.controls['pregunta2'].valid"> {{getErrorField('pregunta2')}} </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-6 animated bounce" *ngIf="form.controls['hobby'].value === 'cine'">
+                    <mat-form-field class="full text-center">
+                        <input matInput placeholder="Cada Cuanto Vas Al Cine" formControlName="pregunta3">
+                        <mat-error *ngIf="!form.controls['pregunta3'].valid"> {{getErrorField('pregunta3')}} </mat-error>
+                    </mat-form-field>
+                </div>
+                <!----------------------------------------------------->
+
+                <!---bloque para hobbys novelas----------------------------------------------->
+                <div class="col-md-6 animated bounce" *ngIf="form.controls['hobby'].value === 'novelas'">
+                    <mat-form-field class="full text-center">
+                        <input matInput placeholder="Novela Favorita" formControlName="pregunta1">
+                        <mat-error *ngIf="!form.controls['pregunta1'].valid"> {{getErrorField('pregunta1')}} </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-6 animated bounce" *ngIf="form.controls['hobby'].value === 'novelas'">
+                    <mat-form-field class="full text-center">
+                        <input matInput placeholder="Actriz O Actor Favorito" formControlName="pregunta2">
+                        <mat-error *ngIf="!form.controls['pregunta2'].valid"> {{getErrorField('pregunta2')}} </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-6 animated bounce" *ngIf="form.controls['hobby'].value === 'novelas'">
+                    <mat-form-field class="full text-center">
+                        <input matInput placeholder="Cuantas Novelas Vez Al Dia" formControlName="pregunta3">
+                        <mat-error *ngIf="!form.controls['pregunta3'].valid"> {{getErrorField('pregunta3')}} </mat-error>
+                    </mat-form-field>
+                </div>
+                <!----------------------------------------------------->
+                <!---bloque para hobbys programar----------------------------------------------->
+                <div class="col-md-6 animated bounce" *ngIf="form.controls['hobby'].value === 'programar'">
+                    <mat-form-field class="full text-center">
+                        <input matInput placeholder="Leguaje Favorito" formControlName="pregunta1">
+                        <mat-error *ngIf="!form.controls['pregunta1'].valid"> {{getErrorField('pregunta1')}} </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-6 animated bounce" *ngIf="form.controls['hobby'].value === 'programar'">
+                    <mat-form-field class="full text-center">
+                        <input matInput placeholder="Cuantos Lenguajes Conoces" formControlName="pregunta2">
+                        <mat-error *ngIf="!form.controls['pregunta2'].valid"> {{getErrorField('pregunta2')}} </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-6 animated bounce" *ngIf="form.controls['hobby'].value === 'programar'">
+                    <mat-form-field class="full text-center">
+                        <input matInput placeholder="S.O Favortito Para Programar" formControlName="pregunta3">
+                        <mat-error *ngIf="!form.controls['pregunta3'].valid"> {{getErrorField('pregunta3')}} </mat-error>
+                    </mat-form-field>
+                </div>
+                <!----------------------------------------------------->
+
+                <!---bloque para hobbys otro----------------------------------------------->
+                <div class="col-md-6 animated bounce" *ngIf="form.controls['hobby'].value === 'otr'">
+                    <mat-form-field class="full text-center">
+                        <input matInput placeholder="Cual Es Tu Hobby" formControlName="pregunta1">
+                        <mat-error *ngIf="!form.controls['pregunta1'].valid"> {{getErrorField('pregunta1')}} </mat-error>
+                    </mat-form-field>
+                </div>
+                <!----------------------------------------------------->
 
             </div>
         </form>
+        <div class="text-center">
+            <button class="btn btn-outline-primary" (click)="guardar()"><i class="fa fa-save"></i> Guardar</button>
+        </div>
     </div>
 </div>

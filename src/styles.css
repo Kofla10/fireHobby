@@ -7,4 +7,11 @@ body {
 body {
     margin: 0;
     font-family: cursive;
+    background-color: darkgray;
+    color: black;
+}
+
+.card {
+    background-color: darkgray;
+    color: black;
 }

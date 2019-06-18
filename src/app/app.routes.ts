@@ -10,7 +10,7 @@ const routes: Routes = [
     { path: 'home', component: HomeComponent },
     { path: 'hobby', component: HobbyComponent },
     { path: 'view', component: ViewFormComponent },
-    { path: '**', redirectTo: ' home' } 
+    { path: '**', redirectTo: 'view' } 
 ];
 
 export const Routing= RouterModule.forRoot(routes, {useHash:true});
